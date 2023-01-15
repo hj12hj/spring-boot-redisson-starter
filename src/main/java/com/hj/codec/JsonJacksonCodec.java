@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.zengtengpeng.codec;
+package com.hj.codec;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -66,9 +66,9 @@ import java.time.format.DateTimeFormatter;
  * @author Nikita Koksharov
  *
  */
-public class MyJsonJacksonCodec extends BaseCodec {
+public class JsonJacksonCodec extends BaseCodec {
 
-    public static final MyJsonJacksonCodec INSTANCE = new MyJsonJacksonCodec();
+    public static final JsonJacksonCodec INSTANCE = new JsonJacksonCodec();
 
     @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
     @JsonAutoDetect(fieldVisibility = Visibility.ANY,
@@ -106,15 +106,15 @@ public class MyJsonJacksonCodec extends BaseCodec {
         }
     };
 
-    public MyJsonJacksonCodec() {
+    public JsonJacksonCodec() {
         this(new ObjectMapper());
     }
 
-    public MyJsonJacksonCodec(ClassLoader classLoader) {
+    public JsonJacksonCodec(ClassLoader classLoader) {
         this(createObjectMapper(classLoader, new ObjectMapper()));
     }
 
-    public MyJsonJacksonCodec(ClassLoader classLoader, MyJsonJacksonCodec codec) {
+    public JsonJacksonCodec(ClassLoader classLoader, JsonJacksonCodec codec) {
         this(createObjectMapper(classLoader, codec.mapObjectMapper.copy()));
     }
 
@@ -141,7 +141,7 @@ public class MyJsonJacksonCodec extends BaseCodec {
         return om;
     }
 
-    public MyJsonJacksonCodec(ObjectMapper mapObjectMapper) {
+    public JsonJacksonCodec(ObjectMapper mapObjectMapper) {
         this.mapObjectMapper = mapObjectMapper.copy();
         init(this.mapObjectMapper);
         initTypeInclusion(this.mapObjectMapper);

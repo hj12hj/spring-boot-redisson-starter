@@ -1,4 +1,4 @@
-package com.zengtengpeng.enums;
+package com.hj.enums;
 
 /**
  * 锁的模式

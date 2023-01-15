@@ -1,4 +1,4 @@
-package com.zengtengpeng.excepiton;
+package com.hj.excepiton;
 
 /**
  * 分布式锁异常

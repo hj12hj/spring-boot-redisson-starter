@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.zengtengpeng.configuration.RedissonConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.hj.configuration.RedissonConfiguration

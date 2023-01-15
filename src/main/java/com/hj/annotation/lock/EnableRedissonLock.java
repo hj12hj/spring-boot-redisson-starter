@@ -1,5 +1,6 @@
-package com.hj.annotation.message;
+package com.hj.annotation.lock;
 
+import com.hj.configuration.RedissonLockConfiguration;
 import com.hj.configuration.RedissonMessageConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -16,8 +17,8 @@ import java.lang.annotation.Target;
 @Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
 @Target({ java.lang.annotation.ElementType.TYPE })
 @Documented
-@Import(RedissonMessageConfiguration.class)
+@Import(RedissonLockConfiguration.class)
 @Configuration
-public @interface EnableRedissonMessage {
+public @interface EnableRedissonLock {
 
 }

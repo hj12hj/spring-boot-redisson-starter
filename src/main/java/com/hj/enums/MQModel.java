@@ -1,4 +1,4 @@
-package com.zengtengpeng.enums;
+package com.hj.enums;
 
 public enum  MQModel {
     //精准的匹配

@@ -1,4 +1,4 @@
-package com.zengtengpeng.properties;
+package com.hj.properties;
 
 import org.redisson.config.ReadMode;
 import org.redisson.config.SubscriptionMode;
@@ -8,6 +8,9 @@ import java.util.List;
 
 /**
  * 多节点配置
+ *
+ * @Author：hj
+ * @Date：2023/1/15 18:38
  */
 public class MultipleServerConfig {
 
@@ -18,11 +21,11 @@ public class MultipleServerConfig {
     private Integer failedSlaveCheckInterval = 180000;
     private Integer masterConnectionMinimumIdleSize = 32;
     private Integer masterConnectionPoolSize = 64;
-    private ReadMode readMode=ReadMode.SLAVE;
-    private SubscriptionMode subscriptionMode=SubscriptionMode.SLAVE;
-    private Integer subscriptionConnectionMinimumIdleSize=1;
-    private Integer subscriptionConnectionPoolSize=50;
-    private Long dnsMonitoringInterval=5000L;
+    private ReadMode readMode = ReadMode.SLAVE;
+    private SubscriptionMode subscriptionMode = SubscriptionMode.SLAVE;
+    private Integer subscriptionConnectionMinimumIdleSize = 1;
+    private Integer subscriptionConnectionPoolSize = 50;
+    private Long dnsMonitoringInterval = 5000L;
 
     private List<String> nodeAddresses = new ArrayList();
 

@@ -1,28 +1,32 @@
-package com.zengtengpeng.properties;
+package com.hj.properties;
 
 
-import com.zengtengpeng.enums.LockModel;
-import com.zengtengpeng.enums.Model;
+
+import com.hj.enums.LockModel;
+import com.hj.enums.Model;
 import org.redisson.config.SslProvider;
 import org.redisson.config.TransportMode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
-import java.net.URI;
 import java.net.URL;
 
+/**
+ * @Author：hj
+ * @Date：2023/1/15 18:38
+ */
 @ConfigurationProperties(prefix = "redisson")
 public class RedissonProperties {
 
     private Model model=Model.SINGLE;
-    private String codec="com.zengtengpeng.codec.MyJsonJacksonCodec";
+    private String codec="com.hj.codec.JsonJacksonCodec";
     private Integer threads;
     private Integer nettyThreads;
     private TransportMode transportMode=TransportMode.NIO;
 
     //公共参数
     private Integer idleConnectionTimeout = 10000;
-//    private Integer pingTimeout = 1000;
+
     private Integer connectTimeout = 10000;
     private Integer timeout = 3000;
     private Integer retryAttempts = 3;

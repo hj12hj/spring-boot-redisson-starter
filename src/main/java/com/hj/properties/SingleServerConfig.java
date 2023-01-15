@@ -1,10 +1,11 @@
-package com.zengtengpeng.properties;
+package com.hj.properties;
 
-
-import org.springframework.util.StringUtils;
 
 /**
  * 单节点配置
+ *
+ * @Author：hj
+ * @Date：2023/1/15 18:38
  */
 public class SingleServerConfig {
 

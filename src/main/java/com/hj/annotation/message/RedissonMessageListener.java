@@ -1,13 +1,21 @@
-package com.zengtengpeng.annotation;
+package com.hj.annotation.message;
 
-import com.zengtengpeng.enums.MQModel;
+
+
+import com.hj.enums.MQModel;
 
 import java.lang.annotation.*;
 
+/**
+ * 消息订阅注解
+ *
+ * @Author：hj
+ * @Date：2023/1/15 18:38
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface MQListener {
+public @interface RedissonMessageListener {
     /**
      * topic name
      * @return
