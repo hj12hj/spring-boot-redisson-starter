@@ -1,5 +1,7 @@
 package com.hj.remoteservice;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * 标记接口
  *
@@ -8,4 +10,5 @@ package com.hj.remoteservice;
  * @time: 1:34 PM
  */
 public interface RedissonRemoteService {
+    void test() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 }

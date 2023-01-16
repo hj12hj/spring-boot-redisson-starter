@@ -3,6 +3,7 @@ package com.hj.postprocessor;
 import com.hj.annotation.remoteservice.RedissonService;
 import com.hj.remoteservice.RedissonRemoteService;
 import org.redisson.api.RedissonClient;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -26,10 +27,8 @@ public class RemoteServicePostProcessor implements BeanPostProcessor {
         // 扫描注册
         RedissonService annotation = aClass.getAnnotation(RedissonService.class);
         if (annotation != null) {
-            Class<?>[] interfaces = bean.getClass().getInterfaces();
-
-//            redissonClient.getRemoteService().register(annotation.name(), bean, Redi);
-
+            RedissonRemoteService redissonRemoteService = (RedissonRemoteService) bean;
+//            redissonClient.getRemoteService().register(annotation, redissonRemoteService);
         }
         return bean;
     }

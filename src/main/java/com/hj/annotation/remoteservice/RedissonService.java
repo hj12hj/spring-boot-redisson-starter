@@ -14,4 +14,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface RedissonService {
 
+    Class<?> value();
+
 }
