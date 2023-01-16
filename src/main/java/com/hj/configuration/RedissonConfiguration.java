@@ -1,5 +1,6 @@
 package com.hj.configuration;
 
+import com.hj.aop.BloomFilterAop;
 import com.hj.aop.RedissonLockAop;
 import com.hj.properties.MultipleServerConfig;
 import com.hj.properties.RedissonProperties;
@@ -26,6 +27,12 @@ import org.springframework.util.StringUtils;
 @EnableConfigurationProperties(value = RedissonProperties.class)
 @ConditionalOnClass(RedissonProperties.class)
 public class RedissonConfiguration {
+
+    @Bean
+    @ConditionalOnMissingBean(BloomFilterAop.class)
+    public BloomFilterAop bloomFilterAop() {
+        return new BloomFilterAop();
+    }
 
     @Autowired
     private RedissonProperties redissonProperties;

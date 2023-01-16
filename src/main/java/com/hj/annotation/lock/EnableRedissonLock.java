@@ -18,7 +18,6 @@ import java.lang.annotation.Target;
 @Target({ java.lang.annotation.ElementType.TYPE })
 @Documented
 @Import(RedissonLockConfiguration.class)
-@Configuration
 public @interface EnableRedissonLock {
 
 }

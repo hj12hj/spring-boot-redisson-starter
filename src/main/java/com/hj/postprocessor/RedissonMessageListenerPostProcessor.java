@@ -1,4 +1,4 @@
-package com.hj.message;
+package com.hj.postprocessor;
 
 import com.hj.annotation.message.RedissonMessageListener;
 import org.redisson.api.RPatternTopic;
@@ -26,10 +26,10 @@ public class RedissonMessageListenerPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) {
 
         ReflectionUtils.doWithMethods(bean.getClass(), method -> {
-            /* AnnotationUtils.findAnnotation 当代理方法进入时在当前代理方法找不到 @MQListener，则会继续向上寻找，最终在原方法中获取到@MQListener注解
+            /* AnnotationUtils.findAnnotation 当代理方法进入时在当前代理方法找不到 @RedissonMessageListener，则会继续向上寻找，最终在原方法中获取到@RedissonMessageListener注解
                从而导致代理方法获取@MQListener注解，从而导致topic将代理方法也加入到MQListener中 */
 //            MQListener annotation = AnnotationUtils.findAnnotation(method, MQListener.class);
-            // 解决方案：仅获取当前方法上是否存在@MQListener注解，存在则添加MQListener
+            // 解决方案：仅获取当前方法上是否存在@RedissonMessageListener注解，存在则添加RedissonMessageListener
             RedissonMessageListener annotation = method.getDeclaredAnnotation(RedissonMessageListener.class);
             if (annotation != null) {
                 switch (annotation.model()) {

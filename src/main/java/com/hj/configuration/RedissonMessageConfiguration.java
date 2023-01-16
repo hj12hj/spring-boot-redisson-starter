@@ -1,9 +1,7 @@
 package com.hj.configuration;
 
-import com.hj.aop.RedissonLockAop;
 import com.hj.aop.RedissonSenderAop;
-import com.hj.message.RedissonMessageListenerPostProcessor;
-import com.hj.properties.RedissonProperties;
+import com.hj.postprocessor.RedissonMessageListenerPostProcessor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 

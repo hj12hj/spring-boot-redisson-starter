@@ -17,7 +17,6 @@ import java.lang.annotation.Target;
 @Target({ java.lang.annotation.ElementType.TYPE })
 @Documented
 @Import(RedissonMessageConfiguration.class)
-@Configuration
 public @interface EnableRedissonMessage {
 
 }

@@ -1,7 +1,6 @@
 package com.hj.properties;
 
 
-
 import com.hj.enums.LockModel;
 import com.hj.enums.Model;
 import org.redisson.config.SslProvider;
@@ -18,11 +17,11 @@ import java.net.URL;
 @ConfigurationProperties(prefix = "redisson")
 public class RedissonProperties {
 
-    private Model model=Model.SINGLE;
-    private String codec="com.hj.codec.JsonJacksonCodec";
+    private Model model = Model.SINGLE;
+    private String codec = "com.hj.codec.JsonJacksonCodec";
     private Integer threads;
     private Integer nettyThreads;
-    private TransportMode transportMode=TransportMode.NIO;
+    private TransportMode transportMode = TransportMode.NIO;
 
     //公共参数
     private Integer idleConnectionTimeout = 10000;
@@ -35,29 +34,37 @@ public class RedissonProperties {
     private Integer subscriptionsPerConnection = 5;
     private String clientName;
     private Boolean sslEnableEndpointIdentification = true;
-    private SslProvider sslProvider=SslProvider.JDK;
+    private SslProvider sslProvider = SslProvider.JDK;
     private URL sslTruststore;
     private String sslTruststorePassword;
     private URL sslKeystore;
     private String sslKeystorePassword;
-    private Integer pingConnectionInterval=30000;
-    private Boolean keepAlive=false;
-    private Boolean tcpNoDelay=false;
+    private Integer pingConnectionInterval = 30000;
+    private Boolean keepAlive = false;
+    private Boolean tcpNoDelay = false;
     private Boolean referenceEnabled = true;
-    private Long lockWatchdogTimeout=30000L;
-    private Boolean keepPubSubOrder=true;
-    private Boolean useScriptCache=false;
-    private Integer minCleanUpDelay=5;
-    private Integer maxCleanUpDelay=1800;
+    private Long lockWatchdogTimeout = 30000L;
+    private Boolean keepPubSubOrder = true;
+    private Boolean useScriptCache = false;
+    private Integer minCleanUpDelay = 5;
+    private Integer maxCleanUpDelay = 1800;
     //锁的模式 如果不设置 单个key默认可重入锁 多个key默认联锁
     private LockModel lockModel;
 
     //等待加锁超时时间 -1一直等待
-    private Long attemptTimeout= 10000L;
+    private Long attemptTimeout = 10000L;
 
     //数据缓存时间 默认30分钟
-    private Long dataValidTime=1000*60* 30L;
+    private Long dataValidTime = 1000 * 60 * 30L;
+    /**
+     * 布隆过滤器 存储的最大数量
+     */
     //结束
+    private Long expectedInsertions = 1000000L;
+    /**
+     * 布隆过滤器 默认误判率0.03
+     */
+    private Double falseProbability = 0.03;
 
     @NestedConfigurationProperty
     private SingleServerConfig singleServerConfig;
@@ -381,5 +388,21 @@ public class RedissonProperties {
 
     public void setTcpNoDelay(boolean tcpNoDelay) {
         this.tcpNoDelay = tcpNoDelay;
+    }
+
+    public Long getExpectedInsertions() {
+        return expectedInsertions;
+    }
+
+    public void setExpectedInsertions(Long expectedInsertions) {
+        this.expectedInsertions = expectedInsertions;
+    }
+
+    public Double getFalseProbability() {
+        return falseProbability;
+    }
+
+    public void setFalseProbability(Double falseProbability) {
+        this.falseProbability = falseProbability;
     }
 }
