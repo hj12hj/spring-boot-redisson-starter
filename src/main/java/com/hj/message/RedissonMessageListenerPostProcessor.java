@@ -11,7 +11,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.util.ReflectionUtils;
 
 /**
- *  spring 后置处理器处理监听到的消息
+ * spring 后置处理器处理监听到的消息
  *
  * @Author：hj
  * @Date：2023/1/15 18:59
@@ -31,26 +31,26 @@ public class RedissonMessageListenerPostProcessor implements BeanPostProcessor {
 //            MQListener annotation = AnnotationUtils.findAnnotation(method, MQListener.class);
             // 解决方案：仅获取当前方法上是否存在@MQListener注解，存在则添加MQListener
             RedissonMessageListener annotation = method.getDeclaredAnnotation(RedissonMessageListener.class);
-            if(annotation!=null){
-                switch (annotation.model()){
+            if (annotation != null) {
+                switch (annotation.model()) {
                     case PRECISE:
                         RTopic topic = redissonClient.getTopic(annotation.name());
-                        logger.info("注解redisson精准监听器name={}",annotation.name());
+                        logger.info("注册 redisson精确监听器 ,topic: {}", annotation.name());
                         topic.addListener(Object.class, (channel, msg) -> {
                             try {
-                                Object[] aras=new Object[method.getParameterTypes().length];
-                                int index=0;
+                                Object[] aras = new Object[method.getParameterTypes().length];
+                                int index = 0;
                                 for (Class parameterType : method.getParameterTypes()) {
                                     String simpleName = parameterType.getSimpleName();
-                                    if("CharSequence".equals(simpleName)){
-                                        aras[index++]=channel;
-                                    }else if (msg.getClass().getSimpleName().equals(simpleName)||"Object".equals(simpleName)){
-                                        aras[index++]=msg;
-                                    }else {
-                                        aras[index++]=null;
+                                    if ("CharSequence".equals(simpleName)) {
+                                        aras[index++] = channel;
+                                    } else if (msg.getClass().getSimpleName().equals(simpleName) || "Object".equals(simpleName)) {
+                                        aras[index++] = msg;
+                                    } else {
+                                        aras[index++] = null;
                                     }
                                 }
-                                method.invoke(bean,aras);
+                                method.invoke(bean, aras);
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
@@ -58,28 +58,28 @@ public class RedissonMessageListenerPostProcessor implements BeanPostProcessor {
                         break;
                     case PATTERN:
                         RPatternTopic patternTopic = redissonClient.getPatternTopic(annotation.name());
-                        logger.info("注解redisson模糊监听器name={}",annotation.name());
+                        logger.info("注册 redisson模糊监听器 ,topic: {}", annotation.name());
                         patternTopic.addListener(Object.class, (pattern, channel, msg) -> {
                             try {
-                                Object[] aras=new Object[method.getParameterTypes().length];
-                                int index=0;
+                                Object[] aras = new Object[method.getParameterTypes().length];
+                                int index = 0;
                                 boolean patternFlag = false;
                                 for (Class parameterType : method.getParameterTypes()) {
                                     String simpleName = parameterType.getSimpleName();
-                                    if("CharSequence".equals(simpleName)){
-                                        if(!patternFlag){
-                                            patternFlag=true;
-                                            aras[index++]=pattern;
-                                        }else {
-                                            aras[index++]=channel;
+                                    if ("CharSequence".equals(simpleName)) {
+                                        if (!patternFlag) {
+                                            patternFlag = true;
+                                            aras[index++] = pattern;
+                                        } else {
+                                            aras[index++] = channel;
                                         }
-                                    }else if (msg.getClass().getSimpleName().equals(simpleName)||"Object".equals(simpleName)){
-                                        aras[index++]=msg;
-                                    }else {
-                                        aras[index++]=null;
+                                    } else if (msg.getClass().getSimpleName().equals(simpleName) || "Object".equals(simpleName)) {
+                                        aras[index++] = msg;
+                                    } else {
+                                        aras[index++] = null;
                                     }
                                 }
-                                method.invoke(bean,aras);
+                                method.invoke(bean, aras);
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
